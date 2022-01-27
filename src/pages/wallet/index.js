@@ -6,7 +6,7 @@ import Toast from "components/Toast";
 import PageContainer from "components/PageContainer";
 import SafeInfoCard from "./SafeInfoCard";
 import BalanceCard from "./BalanceCard";
-import { CardWrapper, LabelWrapper } from "./Wrappers";
+import { CardWrapper, LabelWrapper } from "components/Wrappers";
 
 const Wallet = () => {
 	const [safeData, setSafeData] = useState();

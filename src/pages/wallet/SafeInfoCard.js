@@ -1,4 +1,4 @@
-import { CardWrapper, ValueWrapper, LabelWrapper } from "./Wrappers";
+import { CardWrapper, ValueWrapper, LabelWrapper } from "components/Wrappers";
 
 const SafeInfoCard = ({ label, value }) => {
 	return (

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Placeholder from "assets/placeholder.jpeg";
-import { ValueWrapper } from "./Wrappers";
+import { ValueWrapper } from "components/Wrappers";
 import ImageBox from "components/ImageBox";
 
 const Container = styled.div`

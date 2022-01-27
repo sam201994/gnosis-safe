@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/wallet/:address" element={<Wallet />} />
-        <Route path="/transactions" element={<Transactions />} />
+        <Route path="/transactions/:address" element={<Transactions />} />
       </Routes>
     </Router>
   );

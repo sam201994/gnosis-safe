@@ -4,10 +4,11 @@ const URL = process.env.REACT_APP_BACKEND_URL;
 
 const getQueryParamsObj = (queryParams) => {
 	if (queryParams) {
-		let result = "";
+		let result = "?";
 		for (let key in queryParams) {
-			result = `${key}=${queryParams[key]}&`;
+			result = result + `${key}=${queryParams[key]}&`;
 		}
+		return result;
 	}
 	return "";
 };
