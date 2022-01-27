@@ -4,12 +4,15 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { HeaderWrapper, BodyWrapper } from "components/Wrappers";
 import PageContainer from "components/PageContainer";
+import constants from "constants";
+
+const { HEADER_HEIGHT } = constants;
 
 const Container = styled(BodyWrapper)`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 100%;
+	height: ${(props) => `${props.height}px`};
 `;
 
 const BoxWrapper = styled.div`
@@ -51,7 +54,7 @@ const Home = () => {
 	return (
 		<PageContainer>
 			<HeaderWrapper>Home</HeaderWrapper>
-			<Container>
+			<Container height={window.innerHeight - HEADER_HEIGHT}>
 				<BoxWrapper>
 					<LabelWrapper>Wallet Address</LabelWrapper>
 					<input onChange={handleOnChange} value={address} />
