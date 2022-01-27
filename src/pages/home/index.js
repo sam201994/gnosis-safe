@@ -1,10 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { HeaderWrapper } from "components/Wrappers";
 
+import { useNavigate } from "react-router-dom";
+import { HeaderWrapper, BodyWrapper } from "components/Wrappers";
 import PageContainer from "components/PageContainer";
-import { BodyWrapper } from "components/Wrappers";
 
 const Container = styled(BodyWrapper)`
 	display: flex;

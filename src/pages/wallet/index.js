@@ -11,6 +11,7 @@ import {
 	HeaderWrapper,
 	BodyWrapper,
 } from "components/Wrappers";
+import NotFound from "components/NotFound";
 import SafeInfoCard from "./SafeInfoCard";
 import BalanceCard from "./BalanceCard";
 
@@ -62,46 +63,54 @@ const Wallet = () => {
 	}, []);
 
 	if (loading) return null;
-	if (!safeData || !balanceData) return null;
+
+	const notFound = !safeData || !balanceData;
+
 	return (
 		<PageContainer>
 			<HeaderWrapper>Wallet</HeaderWrapper>
+			{notFound ? (
+				<NotFound />
+			) : (
+				<BodyWrapper>
+					<CardButtonBox
+						onClick={handleViewTransactions}
+						label={"View Transactions"}
+					/>
 
-			<BodyWrapper>
-				<CardButtonBox
-					onClick={handleViewTransactions}
-					label={"View Transactions"}
-				/>
-
-				<SafeInfoCard label="Safe Address" value={safeData.address} />
-				<SafeInfoCard label="Total Owners" value={safeData?.owners?.length} />
-				<SafeInfoCard label="Owner wallet addresses" value={safeData.owners} />
-				<SafeInfoCard label="Threshold" value={safeData.threshold} />
-				<CardWrapper>
-					<LabelWrapper>Tokens</LabelWrapper>
-					{balanceData.map((token, index) => {
-						return (
-							<BalanceCard
-								key={`${token.tokenAddress}-${index}`}
-								data={token}
-								isLastIndex={index === balanceData.length - 1}
-							/>
-						);
-					})}
-				</CardWrapper>
-				<CardWrapper>
-					<LabelWrapper>Tokens</LabelWrapper>
-					{balanceData.map((token, index) => {
-						return (
-							<BalanceCard
-								key={`${token.tokenAddress}-${index}`}
-								data={token}
-								isLastIndex={index === balanceData.length - 1}
-							/>
-						);
-					})}
-				</CardWrapper>
-			</BodyWrapper>
+					<SafeInfoCard label="Safe Address" value={safeData.address} />
+					<SafeInfoCard label="Total Owners" value={safeData?.owners?.length} />
+					<SafeInfoCard
+						label="Owner wallet addresses"
+						value={safeData.owners}
+					/>
+					<SafeInfoCard label="Threshold" value={safeData.threshold} />
+					<CardWrapper>
+						<LabelWrapper>Tokens</LabelWrapper>
+						{balanceData.map((token, index) => {
+							return (
+								<BalanceCard
+									key={`${token.tokenAddress}-${index}`}
+									data={token}
+									isLastIndex={index === balanceData.length - 1}
+								/>
+							);
+						})}
+					</CardWrapper>
+					<CardWrapper>
+						<LabelWrapper>Tokens</LabelWrapper>
+						{balanceData.map((token, index) => {
+							return (
+								<BalanceCard
+									key={`${token.tokenAddress}-${index}`}
+									data={token}
+									isLastIndex={index === balanceData.length - 1}
+								/>
+							);
+						})}
+					</CardWrapper>
+				</BodyWrapper>
+			)}
 		</PageContainer>
 	);
 };

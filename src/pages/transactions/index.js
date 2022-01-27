@@ -7,6 +7,7 @@ import Apis from "apis";
 import constants from "constants";
 import Toast from "components/Toast";
 import PageContainer from "components/PageContainer";
+import NotFound from "components/NotFound";
 import { CardWrapper, HeaderWrapper, BodyWrapper } from "components/Wrappers";
 import TransactionCard from "./TransactionCard";
 
@@ -29,6 +30,7 @@ const MesageBox = ({ label }) => {
 const Transactions = () => {
 	const [transactionInfo, setTransactionInfo] = useState();
 	const [transactions, setTransactions] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const { address } = useParams();
 
 	const fetchData = async () => {
@@ -44,6 +46,8 @@ const Transactions = () => {
 			setTransactionInfo(rest);
 		} catch (e) {
 			Toast("error", e?.response?.data?.message);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -63,28 +67,35 @@ const Transactions = () => {
 		fetchData();
 	}, []);
 
-	if (!transactionInfo || !transactions) return null;
+	if (loading) return null;
+
+	const notFound = !transactionInfo || !transactions;
+
 	return (
 		<PageContainer>
 			<HeaderWrapper>Transactions</HeaderWrapper>
-			<BodyWrapper>
-				<InfiniteScroll
-					height={
-						window.innerWidth < THRESHOLD_SCREEN_WIDTH
-							? window.innerHeight
-							: PAGE_HEIGHT
-					}
-					dataLength={transactions.length}
-					next={fetchMore}
-					hasMore={!!transactionInfo.next}
-					loader={<MesageBox label="Loading....." />}
-					endMessage={<MesageBox label="***** END *****" />}
-				>
-					{transactions.map((d, index) => (
-						<TransactionCard key={`${d.transactionHash}-${index}`} data={d} />
-					))}
-				</InfiniteScroll>
-			</BodyWrapper>
+			{notFound ? (
+				<NotFound />
+			) : (
+				<BodyWrapper>
+					<InfiniteScroll
+						height={
+							window.innerWidth < THRESHOLD_SCREEN_WIDTH
+								? window.innerHeight
+								: PAGE_HEIGHT
+						}
+						dataLength={transactions.length}
+						next={fetchMore}
+						hasMore={!!transactionInfo.next}
+						loader={<MesageBox label="Loading....." />}
+						endMessage={<MesageBox label="***** END *****" />}
+					>
+						{transactions.map((d, index) => (
+							<TransactionCard key={`${d.transactionHash}-${index}`} data={d} />
+						))}
+					</InfiniteScroll>
+				</BodyWrapper>
+			)}
 		</PageContainer>
 	);
 };
