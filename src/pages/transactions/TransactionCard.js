@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { CardWrapper, ValueWrapper, LabelWrapper } from "components/Wrappers";
 
@@ -15,9 +15,9 @@ const TransactionDetailedCard = ({ label, value }) => {
 	);
 };
 
-const TransactionCard = ({ data }) => {
+const TransactionCard = React.memo(({ data }) => {
 	const [showDetails, setShowDetails] = useState(false);
-	const gasFee  = data.fee/Math.pow(10,18)
+	const gasFee = data.fee / Math.pow(10, 18);
 	const handleShowDetails = () => {
 		setShowDetails(!showDetails);
 	};
@@ -32,7 +32,6 @@ const TransactionCard = ({ data }) => {
 				/>
 				<TransactionDetailedCard label="Recipient" value={data.to} />
 				<TransactionDetailedCard label="Gas Fee" value={`${gasFee} ETH`} />
-
 			</>
 		);
 	};
@@ -46,6 +45,6 @@ const TransactionCard = ({ data }) => {
 			{showDetails && renderShowDetails()}
 		</CardWrapper>
 	);
-};
+});
 
 export default TransactionCard;

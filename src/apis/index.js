@@ -32,8 +32,14 @@ const fetchTransactionDetails = async (address, queryParams) => {
 	return response;
 };
 
+const fetchDataByUrl = async (url) => {
+	const response = await axios.get(url);
+	return response;
+};
+
 export default {
 	fetchSafeData,
 	fetchBalanceData,
 	fetchTransactionDetails,
+	fetchDataByUrl
 };
