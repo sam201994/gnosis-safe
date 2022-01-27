@@ -14,7 +14,7 @@ const getQueryParamsObj = (queryParams) => {
 
 const fetchSafeData = async (address) => {
 	const response = await axios.get(`${URL}/safes/${address}/`);
-	return response
+	return response;
 };
 
 const fetchBalanceData = async (address, queryParams) => {

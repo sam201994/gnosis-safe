@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const Toast = (type, message) => {
 	if (type === "error") {
@@ -34,5 +34,4 @@ const Toast = (type, message) => {
 	}
 };
 
-
-export default Toast
+export default Toast;

@@ -1,14 +1,10 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Home from "pages/home";
 import Wallet from "pages/wallet";
 import Transactions from "pages/transactions";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -29,7 +25,6 @@ function App() {
 
         <Route path="/wallet/:address" element={<Wallet />} />
         <Route path="/transactions" element={<Transactions />} />
-    
       </Routes>
     </Router>
   );

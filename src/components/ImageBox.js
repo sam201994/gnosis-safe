@@ -1,6 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Image } from "antd";
-
 const ImageBox = ({ src, fallbackSrc, styles = {} }) => {
   const finalSrc = src ? src : fallbackSrc;
   return (
@@ -12,6 +9,7 @@ const ImageBox = ({ src, fallbackSrc, styles = {} }) => {
           currentTarget.src = fallbackSrc;
         }}
         src={finalSrc}
+        alt="p"
       />
     </>
   );

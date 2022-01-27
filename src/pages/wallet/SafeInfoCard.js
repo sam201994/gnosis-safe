@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import { CardWrapper, ValueWrapper, LabelWrapper } from "./Wrappers";
 
 const SafeInfoCard = ({ label, value }) => {
