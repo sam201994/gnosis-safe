@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import moment from "moment";
 
 import { CardWrapper, ValueWrapper, LabelWrapper } from "components/Wrappers";
 
 const TransactionDetailedCard = ({ label, value }) => {
 	return (
-		<div style={{ marginBottom: "5px" }}>
+		<div style={{ marginBottom: "10px" }}>
 			<LabelWrapper>{label}</LabelWrapper>
 			{Array.isArray(value) ? (
 				value.map((v) => <ValueWrapper key={v}>{v}</ValueWrapper>)
@@ -28,7 +29,11 @@ const TransactionCard = React.memo(({ data }) => {
 				<TransactionDetailedCard label="Transaction Nonce" value={data.nonce} />
 				<TransactionDetailedCard
 					label="Time of Execution"
-					value={data.executionDate}
+					value={
+						data.executionDate
+							? moment(data.executionDate).format("LLL")
+							: "N/A"
+					}
 				/>
 				<TransactionDetailedCard label="Recipient" value={data.to} />
 				<TransactionDetailedCard label="Gas Fee" value={`${gasFee} ETH`} />

@@ -36,11 +36,12 @@ const Transactions = () => {
 	const fetchData = async () => {
 		try {
 			const res = await Apis.fetchTransactionDetails(address, {
-				txType: "MULTISIG_TRANSACTION",
 				ordering: "executionDate",
 				limit: 10,
+				executed: true,
 			});
 			const { results, ...rest } = res.data;
+
 			const finalData = [...transactions, ...results];
 			setTransactions(finalData);
 			setTransactionInfo(rest);
@@ -55,6 +56,7 @@ const Transactions = () => {
 		try {
 			const res = await Apis.fetchDataByUrl(`${transactionInfo.next}`);
 			const { results, ...rest } = res.data;
+
 			const finalData = [...transactions, ...results];
 			setTransactions(finalData);
 			setTransactionInfo(rest);
@@ -71,6 +73,7 @@ const Transactions = () => {
 		if (loading) return <MessageBox label="Loading..." />;
 		if (!transactionInfo || !transactions)
 			return <MessageBox label="No Data" />;
+
 		return (
 			<BodyWrapper>
 				<InfiniteScroll
@@ -85,9 +88,11 @@ const Transactions = () => {
 					loader={<ListFooterBox label="Loading....." />}
 					endMessage={<ListFooterBox label="***** END *****" />}
 				>
-					{transactions.map((d, index) => (
-						<TransactionCard key={`${d.transactionHash}-${index}`} data={d} />
-					))}
+					{transactions.map((d, index) => {
+						return (
+							<TransactionCard key={`${d.transactionHash}-${index}`} data={d} />
+						);
+					})}
 				</InfiniteScroll>
 			</BodyWrapper>
 		);

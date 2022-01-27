@@ -27,7 +27,9 @@ const fetchBalanceData = async (address, queryParams) => {
 
 const fetchTransactionDetails = async (address, queryParams) => {
 	const response = await axios.get(
-		`${URL}/safes/${address}/all-transactions/${getQueryParamsObj(queryParams)}`
+		`${URL}/safes/${address}/multisig-transactions/${getQueryParamsObj(
+			queryParams
+		)}`
 	);
 	return response;
 };
@@ -41,5 +43,5 @@ export default {
 	fetchSafeData,
 	fetchBalanceData,
 	fetchTransactionDetails,
-	fetchDataByUrl
+	fetchDataByUrl,
 };
