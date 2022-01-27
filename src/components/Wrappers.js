@@ -32,8 +32,12 @@ export const HeaderWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	width: ${PAGE_WIDTH}px;
 	height: ${HEADER_HEIGHT}px;
+	width: 100%;
+
+	@media only screen and (min-width: ${THRESHOLD_SCREEN_WIDTH}px) {
+		width: ${PAGE_WIDTH}px;
+	}
 `;
 
 export const BodyWrapper = styled.div`

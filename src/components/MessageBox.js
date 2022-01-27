@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
 import { BodyWrapper } from "components/Wrappers";
+import constants from "constants";
+
+const { HEADER_HEIGHT } = constants;
 
 const Container = styled(BodyWrapper)`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 100%;
+	height: ${(props) => `${props.height}px`};
 `;
 
 const BoxWrapper = styled.div`
@@ -24,14 +27,14 @@ const LabelWrapper = styled.div`
 	font-size: 16px;
 `;
 
-const NotFound = () => {
+const MessageBox = ({ label }) => {
 	return (
-		<Container>
+		<Container height={window.innerHeight - HEADER_HEIGHT}>
 			<BoxWrapper>
-				<LabelWrapper>Not Data</LabelWrapper>
+				<LabelWrapper>{label}</LabelWrapper>
 			</BoxWrapper>
 		</Container>
 	);
 };
 
-export default NotFound;
+export default MessageBox;
