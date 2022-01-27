@@ -1,13 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { HeaderWrapper } from "components/Wrappers";
 
 import PageContainer from "components/PageContainer";
+import { BodyWrapper } from "components/Wrappers";
 
-const Container = styled(PageContainer)`
+const Container = styled(BodyWrapper)`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	height: 100%;
 `;
 
 const BoxWrapper = styled.div`
@@ -47,15 +50,18 @@ const Home = () => {
 	};
 
 	return (
-		<Container>
-			<BoxWrapper>
-				<LabelWrapper>Wallet Address</LabelWrapper>
-				<input onChange={handleOnChange} value={address} />
-				<button disabled={!address} onClick={handleSubmit}>
-					Submit
-				</button>
-			</BoxWrapper>
-		</Container>
+		<PageContainer>
+			<HeaderWrapper>Home</HeaderWrapper>
+			<Container>
+				<BoxWrapper>
+					<LabelWrapper>Wallet Address</LabelWrapper>
+					<input onChange={handleOnChange} value={address} />
+					<button disabled={!address} onClick={handleSubmit}>
+						Submit
+					</button>
+				</BoxWrapper>
+			</Container>
+		</PageContainer>
 	);
 };
 

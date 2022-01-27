@@ -4,12 +4,15 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import Apis from "apis";
+import constants from "constants";
 import Toast from "components/Toast";
 import PageContainer from "components/PageContainer";
-import { CardWrapper } from "components/Wrappers";
+import { CardWrapper, HeaderWrapper, BodyWrapper } from "components/Wrappers";
 import TransactionCard from "./TransactionCard";
 
-export const MessageWrapper = styled.div`
+const { THRESHOLD_SCREEN_WIDTH, PAGE_HEIGHT } = constants;
+
+const MessageWrapper = styled.div`
 	margin-bottom: 5px;
 	text-align: center;
 	color: blue;
@@ -18,9 +21,7 @@ export const MessageWrapper = styled.div`
 const MesageBox = ({ label }) => {
 	return (
 		<CardWrapper>
-			<MessageWrapper style={{ textAlign: "center", color: "blue" }}>
-				{label}
-			</MessageWrapper>
+			<MessageWrapper>{label}</MessageWrapper>
 		</CardWrapper>
 	);
 };
@@ -63,20 +64,27 @@ const Transactions = () => {
 	}, []);
 
 	if (!transactionInfo || !transactions) return null;
-
 	return (
 		<PageContainer>
-			<InfiniteScroll
-				dataLength={transactions.length}
-				next={fetchMore}
-				hasMore={!!transactionInfo.next}
-				loader={<MesageBox label="Loading....." />}
-				endMessage={<MesageBox label="***** END *****" />}
-			>
-				{transactions.map((d, index) => (
-					<TransactionCard key={`${d.transactionHash}-${index}`} data={d} />
-				))}
-			</InfiniteScroll>
+			<HeaderWrapper>Transactions</HeaderWrapper>
+			<BodyWrapper>
+				<InfiniteScroll
+					height={
+						window.innerWidth < THRESHOLD_SCREEN_WIDTH
+							? window.innerHeight
+							: PAGE_HEIGHT
+					}
+					dataLength={transactions.length}
+					next={fetchMore}
+					hasMore={!!transactionInfo.next}
+					loader={<MesageBox label="Loading....." />}
+					endMessage={<MesageBox label="***** END *****" />}
+				>
+					{transactions.map((d, index) => (
+						<TransactionCard key={`${d.transactionHash}-${index}`} data={d} />
+					))}
+				</InfiniteScroll>
+			</BodyWrapper>
 		</PageContainer>
 	);
 };
