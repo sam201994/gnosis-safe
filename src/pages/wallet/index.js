@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Apis from "apis";
 import Toast from "components/Toast";
+import PageContainer from "components/PageContainer";
 import SafeInfoCard from "./SafeInfoCard";
 import BalanceCard from "./BalanceCard";
 import { CardWrapper } from "./Wrappers";
@@ -36,7 +37,8 @@ const Wallet = () => {
 	if (loading) return null;
 	if(!safeData || !balanceData) return null
 	return (
-		<div>
+		<div >
+		<PageContainer >
 			<SafeInfoCard label="Safe Address" value={safeData.address} />
 			<SafeInfoCard label="Total Owners" value={safeData?.owners?.length} />
 			<SafeInfoCard label="Owner wallet addresses" value={safeData.owners} />
@@ -53,6 +55,9 @@ const Wallet = () => {
 					);
 				})}
 			</CardWrapper>
+		
+
+		</PageContainer>
 		</div>
 	);
 };

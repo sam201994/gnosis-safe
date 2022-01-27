@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CardWrapper = styled.div`
 	padding: 20px;
 	margin: 5px;
-	background: #f5f5f5;
+	background: white;
 `;
 
 export const ValueWrapper = styled.div`
