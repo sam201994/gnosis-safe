@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
+import Placeholder from "assets/placeholder.jpeg";
 import { ValueWrapper } from "./Wrappers";
+import ImageBox from "components/ImageBox";
 
 const Container = styled.div`
 	display: flex;
@@ -27,7 +28,11 @@ const BalanceCard = ({ data = {}, isLastIndex }) => {
 	return (
 		<Container isLastIndex={isLastIndex}>
 			<div>
-				<img src={data?.token?.logoUri} width={20} height={20} />
+				<ImageBox
+					fallbackSrc={Placeholder}
+					src={data?.token?.logoUri}
+					styles={{ width: 20, height: 20 }}
+				/>
 			</div>
 			<div>
 				<ValueWrapper>{getToken()}</ValueWrapper>
